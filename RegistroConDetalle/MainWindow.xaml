@@ -1,0 +1,151 @@
+﻿<Window x:Class="RegistroConDetalle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegistroConDetalle"
+        mc:Ignorable="d"
+        Title="registro de Personas" Height="450" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Label Content="PersonaID" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="PersonaIdTextBox" Grid.Row="1" Grid.Column="3">
+            <TextBox.Text>
+                <Binding Path="persona.PersonaId" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Nombre" Grid.Row="3" Grid.Column="1"/>
+        <TextBox x:Name="NombreTextBox" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="5">
+            <TextBox.Text>
+                <Binding Path="persona.Nombre" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Dirección" Grid.Row="5" Grid.Column="1"/>
+        <TextBox x:Name="DireccionTextBox" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5">
+            <TextBox.Text>
+                <Binding Path="persona.Direccion" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Cedula" Grid.Row="7" Grid.Column="1"/>
+        <TextBox x:Name="CedulaTextBox" Grid.Row="7" Grid.Column="3">
+            <TextBox.Text>
+                <Binding  Path="persona.Cedula" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="F.Nacimiento" Grid.Row="7" Grid.Column="5"/>
+        <DatePicker x:Name="FechaDatePicker" Grid.Row="7" Grid.Column="7">
+            <DatePicker.SelectedDate>
+                <Binding Path="persona.FechaNacimiento" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <GroupBox Header="Agregar Telefonos" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="7" Height="Auto">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Teléfono:"/>
+                    <TextBox x:Name="TelefonoTextBox" Width="110">
+                        <TextBox.Text>
+                            <Binding Path="telefono.Telefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Tipo"/>
+                    <TextBox x:Name="TipoTextBox" Width="110">
+                        <TextBox.Text>
+                            <Binding Path="telefono.TipoTelefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Button x:Name="MasButton" Width="40" HorizontalAlignment="Right" Click="MasButton_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Iconos\mas.png" Stretch="Uniform"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <DataGrid x:Name="TelefonosDataGrid" Height="100">
+                    <DataGrid.ItemsSource>
+                        <Binding Path="persona.Telefonos" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGrid.ItemsSource>
+                </DataGrid>
+                <Button x:Name="RemoverButton" Content="Remover Fila" Width="120" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Click="RemoverButton_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Iconos\eliminar.png" AlignmentX="Left" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="BuscarButton" Content="Buscar" Grid.Row="1" Grid.Column="5" HorizontalContentAlignment="Right" Click="BuscarButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos\buscar.png" AlignmentX="Left" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="NuevoButton" Content="Nuevo" Grid.Row="10" Grid.Column="3" HorizontalContentAlignment="Right" Height="36" Grid.RowSpan="2" VerticalAlignment="Top" Click="NuevoButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos\nuevo.png" AlignmentX="Left" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="GuardarButton" Content="Guardar" Grid.Row="10" Grid.Column="5" HorizontalContentAlignment="Right" Click="GuardarButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos\guardar.jpg" AlignmentX="Left" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="EliminarButton" Content="Eliminar" Grid.Row="10" Grid.Column="7" HorizontalContentAlignment="Right" Click="EliminarButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Iconos\eliminar.png" AlignmentX="Left" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+    </Grid>
+</Window>
