@@ -88,7 +88,7 @@
                     <Label Content="Teléfono:"/>
                     <TextBox x:Name="TelefonoTextBox" Width="110">
                         <TextBox.Text>
-                            <Binding Path="telefono.Telefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding Path="persona.Telefonos.Telefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <ExceptionValidationRule/>
                                 </Binding.ValidationRules>
@@ -98,7 +98,7 @@
                     <Label Content="Tipo"/>
                     <TextBox x:Name="TipoTextBox" Width="110">
                         <TextBox.Text>
-                            <Binding Path="telefono.TipoTelefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding Path="persona.Telefonos.TipoTelefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                 <Binding.ValidationRules>
                                     <ExceptionValidationRule/>
                                 </Binding.ValidationRules>

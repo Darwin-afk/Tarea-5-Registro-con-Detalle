@@ -24,7 +24,7 @@ namespace RegistroConDetalle.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TelefonosDetalle",
+                name: "Telefonos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -35,25 +35,25 @@ namespace RegistroConDetalle.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TelefonosDetalle", x => x.Id);
+                    table.PrimaryKey("PK_Telefonos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TelefonosDetalle_Personas_PersonasPersonaId",
+                        name: "FK_Telefonos_Personas_PersonasPersonaId",
                         column: x => x.PersonasPersonaId,
                         principalTable: "Personas",
                         principalColumn: "PersonaId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TelefonosDetalle_PersonasPersonaId",
-                table: "TelefonosDetalle",
+                name: "IX_Telefonos_PersonasPersonaId",
+                table: "Telefonos",
                 column: "PersonasPersonaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TelefonosDetalle");
+                name: "Telefonos");
 
             migrationBuilder.DropTable(
                 name: "Personas");

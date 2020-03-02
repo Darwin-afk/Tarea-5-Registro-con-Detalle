@@ -16,6 +16,7 @@ using RegistroConDetalle.Entidades;
 using RegistroConDetalle.BLL;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Globalization;
 
 namespace RegistroConDetalle
 {
@@ -40,9 +41,7 @@ namespace RegistroConDetalle
         {
             bool paso = false;
 
-            MessageBox.Show(Convert.ToString(contenedor.persona.Telefonos.Count()));
-
-            if(contenedor.persona.PersonaId== 0)
+            if(contenedor.persona.PersonaId == 0)
             {
                 paso = PersonasBLL.Guardar(contenedor.persona);
             }
@@ -78,7 +77,6 @@ namespace RegistroConDetalle
             {
                 contenedor.persona = persona;
                 cargarGrid();
-                MessageBox.Show(Convert.ToString(contenedor.persona.Telefonos.Count()));
             }
             else
             {
@@ -91,6 +89,7 @@ namespace RegistroConDetalle
             if(PersonasBLL.Eliminar(contenedor.persona.PersonaId))
             {
                 MessageBox.Show("Eliminado");
+                limpiar();
             }
             else
             {
@@ -100,12 +99,12 @@ namespace RegistroConDetalle
 
         private void MasButton_Click(object sender, RoutedEventArgs e)
         {
-            contenedor.persona.Telefonos.Add(new TelefonosDetalle(contenedor.telefono));
+            contenedor.persona.Telefonos.Add(new TelefonosDetalle(TelefonoTextBox.Text,TipoTextBox.Text));
 
             cargarGrid();
 
-            contenedor.telefono.Telefono = string.Empty;
-            contenedor.telefono.TipoTelefono = string.Empty;
+            TelefonoTextBox.Clear();
+            TipoTextBox.Clear();
 
             TelefonoTextBox.Focus();
         }
@@ -121,13 +120,12 @@ namespace RegistroConDetalle
 
         private void limpiar()
         {
-            contenedor.persona.PersonaId = 0;
-            contenedor.persona.Nombre = string.Empty;
-            contenedor.persona.Direccion = string.Empty;
-            contenedor.persona.Cedula = string.Empty;
-            contenedor.persona.FechaNacimiento = DateTime.Now;
-
-            contenedor.persona.Telefonos = new List<TelefonosDetalle>();
+            PersonaIdTextBox.Text = "0";
+            NombreTextBox.Clear();
+            DireccionTextBox.Clear();
+            CedulaTextBox.Clear();
+            FechaDatePicker.SelectedDate = DateTime.Now;
+            TelefonosDataGrid.ItemsSource = new List<TelefonosDetalle>();
         }
 
         private bool existeEnLaBaseDeDatos()
@@ -144,15 +142,14 @@ namespace RegistroConDetalle
             contenedor.persona.Telefonos = actual;
         }
 
+        //clase para poder aplicarle el propertyChanged a la entidad
         public class Contenedor : INotifyPropertyChanged
         {
             private Personas _persona { get; set; }
-            public TelefonosDetalle telefono { get; set; }
 
             public Contenedor()
             {
                 persona = new Personas();
-                telefono = new TelefonosDetalle();
             }
 
             public Personas persona
@@ -174,6 +171,10 @@ namespace RegistroConDetalle
                     PropertyChanged(this, new PropertyChangedEventArgs(caller));
                 }
             }
+
+            
         }
+
+        
     }
 }

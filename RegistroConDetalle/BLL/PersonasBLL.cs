@@ -40,11 +40,19 @@ namespace RegistroConDetalle.BLL
 
             try
             {
-                var anterior = db.Personas.Find(personas.PersonaId);
+                var anterior = PersonasBLL.Buscar(personas.PersonaId);
+                //para borrar de la db los telefonos que ya no existen
                 foreach(var item in anterior.Telefonos)
                 {
                     if (!personas.Telefonos.Exists(t => t.Id == item.Id))
                         db.Entry(item).State = EntityState.Deleted;
+                }
+
+                //para agregar los nuevos telefonos de la persona
+                foreach(var item in personas.Telefonos)
+                {
+                    if (item.Id == 0)
+                        db.Telefonos.Add(item);
                 }
 
                 db.Entry(personas).State = EntityState.Modified;
@@ -69,7 +77,7 @@ namespace RegistroConDetalle.BLL
 
             try
             {
-                var eliminar = db.Personas.Find(id);
+                var eliminar = PersonasBLL.Buscar(id);
                 db.Entry(eliminar).State = EntityState.Deleted;
                 paso = db.SaveChanges() > 0;
             }
@@ -91,8 +99,9 @@ namespace RegistroConDetalle.BLL
 
             try
             {
-                persona = db.Personas.Find(id);
-                persona.Telefonos.Count();
+                persona = db.Personas.Include(x => x.Telefonos)
+                    .Where(x => x.PersonaId == id)
+                    .FirstOrDefault();
             }
             catch(Exception)
             {

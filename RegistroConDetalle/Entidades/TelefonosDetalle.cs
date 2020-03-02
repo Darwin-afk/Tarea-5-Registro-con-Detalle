@@ -4,6 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RegistroConDetalle.Entidades
 {
@@ -21,11 +22,11 @@ namespace RegistroConDetalle.Entidades
             TipoTelefono = string.Empty;
         }
 
-        public TelefonosDetalle(TelefonosDetalle telefono)
+        public TelefonosDetalle(string telefono, string tipoTelefono)
         {
-            Id = telefono.Id;
-            Telefono = telefono.Telefono;
-            TipoTelefono = telefono.TipoTelefono;
+            Id = 0;
+            Telefono = telefono;
+            TipoTelefono = tipoTelefono;
         }
 
         public string Telefono

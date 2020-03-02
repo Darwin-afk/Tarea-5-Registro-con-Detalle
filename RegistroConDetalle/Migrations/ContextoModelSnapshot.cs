@@ -58,7 +58,7 @@ namespace RegistroConDetalle.Migrations
 
                     b.HasIndex("PersonasPersonaId");
 
-                    b.ToTable("TelefonosDetalle");
+                    b.ToTable("Telefonos");
                 });
 
             modelBuilder.Entity("RegistroConDetalle.Entidades.TelefonosDetalle", b =>
