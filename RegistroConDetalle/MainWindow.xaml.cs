@@ -142,6 +142,43 @@ namespace RegistroConDetalle
             contenedor.persona.Telefonos = actual;
         }
 
+        private bool Validar()
+        {
+            bool paso = true;
+
+            if (string.IsNullOrWhiteSpace(PersonaIdTextBox.Text))
+                paso = false;
+            else
+            {
+                try
+                {
+                    int i = Convert.ToInt32(PersonaIdTextBox.Text);
+                }
+                catch(FormatException)
+                {
+                    paso = false;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(NombreTextBox.Text))
+                paso = false;
+            else
+            {
+                foreach(var caracter in NombreTextBox.Text)
+                {
+                    if (!char.IsLetter(caracter))
+                        paso = false;
+                }
+            }
+
+            //faltan las demas validaciones ya que me aburri
+
+            if (paso == false)
+                MessageBox.Show("Datos invalidos");
+
+            return paso;
+        }
+
         //clase para poder aplicarle el propertyChanged a la entidad
         public class Contenedor : INotifyPropertyChanged
         {
@@ -175,6 +212,5 @@ namespace RegistroConDetalle
             
         }
 
-        
     }
 }
