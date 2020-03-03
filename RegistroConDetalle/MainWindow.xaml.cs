@@ -14,8 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RegistroConDetalle.Entidades;
 using RegistroConDetalle.BLL;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Globalization;
 
 namespace RegistroConDetalle
@@ -25,11 +23,11 @@ namespace RegistroConDetalle
     /// </summary>
     public partial class MainWindow : Window
     {
-        Contenedor contenedor = new Contenedor();
+        Personas persona = new Personas();
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = contenedor; //se le asigna el objeto contenedor al DataContext para hacer el binding
+            this.DataContext = persona; //se le asigna el objeto al DataContext para hacer el binding
         }
 
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
@@ -41,15 +39,18 @@ namespace RegistroConDetalle
         {
             bool paso = false;
 
-            if(contenedor.persona.PersonaId == 0)
+            if (!Validar())
+                return;
+
+            if(persona.PersonaId == 0)
             {
-                paso = PersonasBLL.Guardar(contenedor.persona);
+                paso = PersonasBLL.Guardar(persona);
             }
             else
             {
                 if(existeEnLaBaseDeDatos())
                 {
-                    paso = PersonasBLL.Modificar(contenedor.persona);
+                    paso = PersonasBLL.Modificar(persona);
                 }
                 else
                 {
@@ -71,12 +72,12 @@ namespace RegistroConDetalle
 
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
-            Personas persona = PersonasBLL.Buscar(contenedor.persona.PersonaId);
+            Personas personaAnterior = PersonasBLL.Buscar(persona.PersonaId);
 
             if (persona!=null)
             {
-                contenedor.persona = persona;
-                cargarGrid();
+                persona = personaAnterior;
+                reCargar();
             }
             else
             {
@@ -86,7 +87,7 @@ namespace RegistroConDetalle
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if(PersonasBLL.Eliminar(contenedor.persona.PersonaId))
+            if(PersonasBLL.Eliminar(persona.PersonaId))
             {
                 MessageBox.Show("Eliminado");
                 limpiar();
@@ -99,9 +100,9 @@ namespace RegistroConDetalle
 
         private void MasButton_Click(object sender, RoutedEventArgs e)
         {
-            contenedor.persona.Telefonos.Add(new TelefonosDetalle(TelefonoTextBox.Text,TipoTextBox.Text));
+            persona.Telefonos.Add(new TelefonosDetalle(TelefonoTextBox.Text,TipoTextBox.Text));
 
-            cargarGrid();
+            reCargar();
 
             TelefonoTextBox.Clear();
             TipoTextBox.Clear();
@@ -113,33 +114,32 @@ namespace RegistroConDetalle
         {
             if(TelefonosDataGrid.Items.Count > 1 && TelefonosDataGrid.SelectedIndex < TelefonosDataGrid.Items.Count - 1)
             {
-                contenedor.persona.Telefonos.RemoveAt(TelefonosDataGrid.SelectedIndex);
-                cargarGrid();
+                persona.Telefonos.RemoveAt(TelefonosDataGrid.SelectedIndex);
+                reCargar();
             }
         }
 
         private void limpiar()
         {
             PersonaIdTextBox.Text = "0";
-            NombreTextBox.Clear();
-            DireccionTextBox.Clear();
-            CedulaTextBox.Clear();
+            NombreTextBox.Text = string.Empty;
+            DireccionTextBox.Text = string.Empty;
+            CedulaTextBox.Text = string.Empty;
             FechaDatePicker.SelectedDate = DateTime.Now;
             TelefonosDataGrid.ItemsSource = new List<TelefonosDetalle>();
         }
 
         private bool existeEnLaBaseDeDatos()
         {
-            Personas persona = PersonasBLL.Buscar(contenedor.persona.PersonaId);
+            Personas personaAnterior = PersonasBLL.Buscar(persona.PersonaId);
 
             return persona != null;
         }
 
-        private void cargarGrid()
+        private void reCargar()
         {
-            List<TelefonosDetalle> actual = contenedor.persona.Telefonos;
-            contenedor.persona.Telefonos = null;
-            contenedor.persona.Telefonos = actual;
+            this.DataContext = null;
+            this.DataContext = persona;
         }
 
         private bool Validar()
@@ -171,46 +171,12 @@ namespace RegistroConDetalle
                 }
             }
 
-            //faltan las demas validaciones ya que me aburri
+            //faltan las demas validaciones
 
             if (paso == false)
                 MessageBox.Show("Datos invalidos");
 
             return paso;
         }
-
-        //clase para poder aplicarle el propertyChanged a la entidad
-        public class Contenedor : INotifyPropertyChanged
-        {
-            private Personas _persona { get; set; }
-
-            public Contenedor()
-            {
-                persona = new Personas();
-            }
-
-            public Personas persona
-            {
-                get { return _persona; }
-                set
-                {
-                    _persona = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            public void OnPropertyChanged([CallerMemberName] string caller = "")
-            {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(caller));
-                }
-            }
-
-            
-        }
-
     }
 }

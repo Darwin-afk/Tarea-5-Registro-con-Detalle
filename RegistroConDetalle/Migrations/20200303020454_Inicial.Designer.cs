@@ -9,8 +9,8 @@ using RegistroConDetalle.DAL;
 namespace RegistroConDetalle.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200302005205_inicial")]
-    partial class inicial
+    [Migration("20200303020454_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

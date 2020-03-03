@@ -48,11 +48,11 @@ namespace RegistroConDetalle.BLL
                         db.Entry(item).State = EntityState.Deleted;
                 }
 
-                //para agregar los nuevos telefonos de la persona
+                //Para agregar o modicar telefonos de la persona
                 foreach(var item in personas.Telefonos)
                 {
-                    if (item.Id == 0)
-                        db.Telefonos.Add(item);
+                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
+                    db.Entry(item).State = estado;
                 }
 
                 db.Entry(personas).State = EntityState.Modified;
@@ -101,7 +101,7 @@ namespace RegistroConDetalle.BLL
             {
                 persona = db.Personas.Include(x => x.Telefonos)
                     .Where(x => x.PersonaId == id)
-                    .FirstOrDefault();
+                    .SingleOrDefault();
             }
             catch(Exception)
             {

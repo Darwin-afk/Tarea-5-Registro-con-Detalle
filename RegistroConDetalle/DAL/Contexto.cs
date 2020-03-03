@@ -9,7 +9,6 @@ namespace RegistroConDetalle.DAL
     public class Contexto : DbContext
     {
         public DbSet<Personas> Personas { get; set; }
-        public DbSet<TelefonosDetalle> Telefonos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

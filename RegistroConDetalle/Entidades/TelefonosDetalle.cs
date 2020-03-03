@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RegistroConDetalle.Entidades
 {
-    public class TelefonosDetalle : INotifyPropertyChanged
+    public class TelefonosDetalle
     {
         [Key]
         public int Id { get; set; }
-        private string _Telefono;
-        private string _TipoTelefono;
+        public string Telefono { get; set; }
+        public string TipoTelefono { get; set; }
 
         public TelefonosDetalle()
         {
@@ -27,37 +24,6 @@ namespace RegistroConDetalle.Entidades
             Id = 0;
             Telefono = telefono;
             TipoTelefono = tipoTelefono;
-        }
-
-        public string Telefono
-        {
-            get { return _Telefono; }
-            set
-            {
-                _Telefono = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string TipoTelefono
-        {
-            get { return _TipoTelefono; }
-            set
-            {
-                _TipoTelefono = value;
-                OnPropertyChanged();
-            }
-        }
-
-        //este evento es para que se actualiza la ventana con los cambio hechos a al telefono
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string caller = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(caller));
-            }
         }
     }
 }

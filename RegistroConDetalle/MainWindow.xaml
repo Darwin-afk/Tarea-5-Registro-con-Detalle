@@ -35,7 +35,7 @@
         <Label Content="PersonaID" Grid.Row="1" Grid.Column="1"/>
         <TextBox x:Name="PersonaIdTextBox" Grid.Row="1" Grid.Column="3">
             <TextBox.Text>
-                <Binding Path="persona.PersonaId" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                <Binding Path="PersonaId" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                     <Binding.ValidationRules>
                         <ExceptionValidationRule/>
                     </Binding.ValidationRules>
@@ -45,41 +45,25 @@
         <Label Content="Nombre" Grid.Row="3" Grid.Column="1"/>
         <TextBox x:Name="NombreTextBox" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="5">
             <TextBox.Text>
-                <Binding Path="persona.Nombre" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <ExceptionValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
+                <Binding Path="Nombre" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
             </TextBox.Text>
         </TextBox>
         <Label Content="Dirección" Grid.Row="5" Grid.Column="1"/>
         <TextBox x:Name="DireccionTextBox" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5">
             <TextBox.Text>
-                <Binding Path="persona.Direccion" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <ExceptionValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
+                <Binding Path="Direccion" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
             </TextBox.Text>
         </TextBox>
         <Label Content="Cedula" Grid.Row="7" Grid.Column="1"/>
         <TextBox x:Name="CedulaTextBox" Grid.Row="7" Grid.Column="3">
             <TextBox.Text>
-                <Binding  Path="persona.Cedula" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <ExceptionValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
+                <Binding Path="Cedula" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
             </TextBox.Text>
         </TextBox>
         <Label Content="F.Nacimiento" Grid.Row="7" Grid.Column="5"/>
         <DatePicker x:Name="FechaDatePicker" Grid.Row="7" Grid.Column="7">
             <DatePicker.SelectedDate>
-                <Binding Path="persona.FechaNacimiento" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                    <Binding.ValidationRules>
-                        <ExceptionValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
+                <Binding Path="FechaNacimiento" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
             </DatePicker.SelectedDate>
         </DatePicker>
         <GroupBox Header="Agregar Telefonos" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="7" Height="Auto">
@@ -88,21 +72,13 @@
                     <Label Content="Teléfono:"/>
                     <TextBox x:Name="TelefonoTextBox" Width="110">
                         <TextBox.Text>
-                            <Binding Path="persona.Telefonos.Telefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule/>
-                                </Binding.ValidationRules>
-                            </Binding>
+                            <Binding Path="Telefonos.Telefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
                         </TextBox.Text>
                     </TextBox>
                     <Label Content="Tipo"/>
                     <TextBox x:Name="TipoTextBox" Width="110">
                         <TextBox.Text>
-                            <Binding Path="persona.Telefonos.TipoTelefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule/>
-                                </Binding.ValidationRules>
-                            </Binding>
+                            <Binding Path="Telefonos.TipoTelefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
                         </TextBox.Text>
                     </TextBox>
                     <Button x:Name="MasButton" Width="40" HorizontalAlignment="Right" Click="MasButton_Click">
@@ -113,11 +89,7 @@
                 </StackPanel>
                 <DataGrid x:Name="TelefonosDataGrid" Height="100">
                     <DataGrid.ItemsSource>
-                        <Binding Path="persona.Telefonos" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                            <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
+                        <Binding Path="Telefonos" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
                     </DataGrid.ItemsSource>
                 </DataGrid>
                 <Button x:Name="RemoverButton" Content="Remover Fila" Width="120" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Click="RemoverButton_Click">
