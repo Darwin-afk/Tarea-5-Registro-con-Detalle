@@ -40,20 +40,10 @@ namespace RegistroConDetalle.BLL
 
             try
             {
-                var anterior = PersonasBLL.Buscar(personas.PersonaId);
-
-                //para borrar de la db los telefonos que ya no existen
-                foreach(var item in anterior.Telefonos)
-                {
-                    if (!personas.Telefonos.Exists(t => t.Id == item.Id))
-                        db.Entry(item).State = EntityState.Deleted;
-                }
-
-                //Para agregar o modicar telefonos de la persona
+                db.Database.ExecuteSqlRaw($"Delete FROM TelefonosDetalle Where PersonasPersonaId={personas.PersonaId}");
                 foreach(var item in personas.Telefonos)
                 {
-                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
-                    db.Entry(item).State = estado;
+                    db.Entry(item).State = EntityState.Added;
                 }
 
                 db.Entry(personas).State = EntityState.Modified;
