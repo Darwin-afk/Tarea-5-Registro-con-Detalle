@@ -4,43 +4,59 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using RegistroConDetalle.Entidades;
-using System.Linq;
 
 namespace RegistroConDetalle.BLL.Tests
 {
     [TestClass()]
     public class PersonasBLLTests
     {
-        /*[TestMethod()]
+        [TestMethod()]
         public void GuardarTest()
         {
-            Assert.Fail();
+            Personas persona = new Personas();
+
+            persona.PersonaId = 0;
+            persona.Nombre = "Jose";
+            persona.Cedula = "123";
+            persona.Direccion = "El rosal";
+            persona.FechaNacimiento = DateTime.Now;
+            persona.Telefonos.Add(new TelefonosDetalle("123", "t"));
+            persona.Telefonos.Add(new TelefonosDetalle("11", "e"));
+
+            bool paso = PersonasBLL.Guardar(persona);
+
+            Assert.IsTrue(paso);
         }
 
         [TestMethod()]
         public void ModificarTest()
         {
-            Assert.Fail();
+            Personas persona = PersonasBLL.Buscar(1);
+
+            persona.Telefonos.RemoveAt(1);
+            persona.Direccion = "El Rosal Azul";
+
+            bool paso = PersonasBLL.Modificar(persona);
+
+            Assert.IsTrue(paso);
         }
 
         [TestMethod()]
         public void EliminarTest()
         {
-            Assert.Fail();
-        }*/
+            bool paso = PersonasBLL.Eliminar(1);
+
+            Assert.IsTrue(paso);
+        }
 
         [TestMethod()]
         public void BuscarTest()
         {
-            Personas persona = PersonasBLL.Buscar(1);
+            Personas persona = new Personas();
 
-            Assert.IsTrue(persona.Telefonos.Count() > 0);
+            persona = PersonasBLL.Buscar(1);
+
+            Assert.IsTrue(persona != null);
         }
-
-        /*[TestMethod()]
-        public void GetListaTest()
-        {
-            Assert.Fail();
-        }*/
     }
 }

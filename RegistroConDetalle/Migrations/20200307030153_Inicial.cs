@@ -24,7 +24,7 @@ namespace RegistroConDetalle.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Telefonos",
+                name: "TelefonosDetalle",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -35,9 +35,9 @@ namespace RegistroConDetalle.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Telefonos", x => x.Id);
+                    table.PrimaryKey("PK_TelefonosDetalle", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Telefonos_Personas_PersonasPersonaId",
+                        name: "FK_TelefonosDetalle_Personas_PersonasPersonaId",
                         column: x => x.PersonasPersonaId,
                         principalTable: "Personas",
                         principalColumn: "PersonaId",
@@ -45,15 +45,15 @@ namespace RegistroConDetalle.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Telefonos_PersonasPersonaId",
-                table: "Telefonos",
+                name: "IX_TelefonosDetalle_PersonasPersonaId",
+                table: "TelefonosDetalle",
                 column: "PersonasPersonaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Telefonos");
+                name: "TelefonosDetalle");
 
             migrationBuilder.DropTable(
                 name: "Personas");

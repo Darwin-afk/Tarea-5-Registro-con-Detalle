@@ -27,7 +27,7 @@ namespace RegistroConDetalle
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = persona; //se le asigna el objeto al DataContext para hacer el binding
+            this.DataContext = persona;
         }
 
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
@@ -72,9 +72,12 @@ namespace RegistroConDetalle
 
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
-            Personas personaAnterior = PersonasBLL.Buscar(persona.PersonaId);
+            int id = 0;
+            int.TryParse(PersonaIdTextBox.Text, out id);
 
-            if (persona!=null)
+            Personas personaAnterior = PersonasBLL.Buscar(id);
+
+            if (personaAnterior!=null)
             {
                 persona = personaAnterior;
                 reCargar();
@@ -87,7 +90,10 @@ namespace RegistroConDetalle
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if(PersonasBLL.Eliminar(persona.PersonaId))
+            int id = 0;
+            int.TryParse(PersonaIdTextBox.Text, out id);
+
+            if (PersonasBLL.Eliminar(id))
             {
                 MessageBox.Show("Eliminado");
                 limpiar();
@@ -112,7 +118,7 @@ namespace RegistroConDetalle
 
         private void RemoverButton_Click(object sender, RoutedEventArgs e)
         {
-            if(TelefonosDataGrid.Items.Count > 1 && TelefonosDataGrid.SelectedIndex < TelefonosDataGrid.Items.Count - 1)
+            if(TelefonosDataGrid.Items.Count > 0 && TelefonosDataGrid.SelectedIndex < TelefonosDataGrid.Items.Count - 1)
             {
                 persona.Telefonos.RemoveAt(TelefonosDataGrid.SelectedIndex);
                 reCargar();
@@ -133,7 +139,7 @@ namespace RegistroConDetalle
         {
             Personas personaAnterior = PersonasBLL.Buscar(persona.PersonaId);
 
-            return persona != null;
+            return personaAnterior != null;
         }
 
         private void reCargar()
@@ -171,7 +177,25 @@ namespace RegistroConDetalle
                 }
             }
 
-            //faltan las demas validaciones
+            if (string.IsNullOrWhiteSpace(CedulaTextBox.Text.Replace("-", "")))
+                paso = false;
+            else
+            {
+                foreach (var caracter in CedulaTextBox.Text)
+                {
+                    if (!Char.IsDigit(caracter))
+                        paso = false;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(DireccionTextBox.Text))
+                paso = false;
+
+            if (FechaDatePicker.SelectedDate == null || FechaDatePicker.SelectedDate> DateTime.Now)
+                paso = false;
+
+            if (persona.Telefonos.Count == 0)
+                paso = false;
 
             if (paso == false)
                 MessageBox.Show("Datos invalidos");

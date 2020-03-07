@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistroConDetalle", "RegistroConDetalle\RegistroConDetalle.csproj", "{A53AFEAF-09DF-4CBA-B532-BDC1927B819A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroConDetalleTests", "RegistroConDetalleTests\RegistroConDetalleTests.csproj", "{06EDA903-2655-4EF5-94F7-D166F967FA4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistroConDetalleTests", "RegistroConDetalleTests\RegistroConDetalleTests.csproj", "{06EDA903-2655-4EF5-94F7-D166F967FA4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RegistroDetalle", "RegistroDetalle", "{15AEAD46-5197-49CF-BE07-9B5A50608334}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A53AFEAF-09DF-4CBA-B532-BDC1927B819A} = {15AEAD46-5197-49CF-BE07-9B5A50608334}
+		{06EDA903-2655-4EF5-94F7-D166F967FA4A} = {15AEAD46-5197-49CF-BE07-9B5A50608334}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E9DFE41-0F42-4883-B227-DF12777E02C9}

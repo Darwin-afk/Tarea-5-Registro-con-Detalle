@@ -9,7 +9,7 @@ using RegistroConDetalle.DAL;
 namespace RegistroConDetalle.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200303020454_Inicial")]
+    [Migration("20200307030153_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,7 +60,7 @@ namespace RegistroConDetalle.Migrations
 
                     b.HasIndex("PersonasPersonaId");
 
-                    b.ToTable("Telefonos");
+                    b.ToTable("TelefonosDetalle");
                 });
 
             modelBuilder.Entity("RegistroConDetalle.Entidades.TelefonosDetalle", b =>
