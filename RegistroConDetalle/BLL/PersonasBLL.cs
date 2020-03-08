@@ -40,7 +40,7 @@ namespace RegistroConDetalle.BLL
 
             try
             {
-                db.Database.ExecuteSqlRaw($"Delete FROM TelefonosDetalle Where PersonasPersonaId={personas.PersonaId}");
+                db.Database.ExecuteSqlRaw($"Delete FROM TelefonosDetalle Where PersonaId={personas.PersonaId}");
                 foreach(var item in personas.Telefonos)
                 {
                     db.Entry(item).State = EntityState.Added;

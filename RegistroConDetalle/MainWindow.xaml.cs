@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RegistroConDetalle.Entidades;
 using RegistroConDetalle.BLL;
+using RegistroConDetalle.Validaciones;
 using System.Globalization;
 
 namespace RegistroConDetalle

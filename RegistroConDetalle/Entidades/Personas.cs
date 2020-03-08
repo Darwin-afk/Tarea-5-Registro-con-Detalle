@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RegistroConDetalle.Entidades
 {
@@ -14,6 +15,7 @@ namespace RegistroConDetalle.Entidades
         public string Direccion { get; set; }
         public DateTime FechaNacimiento { get; set; }
 
+        [ForeignKey("PersonaId")]
         public virtual List<TelefonosDetalle> Telefonos { get; set; }
 
         public Personas()
@@ -24,6 +26,7 @@ namespace RegistroConDetalle.Entidades
             Direccion = string.Empty;
             FechaNacimiento = DateTime.Now;
 
+            
             Telefonos = new List<TelefonosDetalle>();
         }
     }

@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegistroConDetalle"
+        xmlns:src="clr-namespace:RegistroConDetalle.Validaciones"
         mc:Ignorable="d"
-        Title="Registro de Personas" Height="450" Width="450">
+        Title="Registro de Personas" Height="600" Width="450">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="8*"/>
@@ -20,65 +21,95 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="16*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Label Content="PersonaID" Grid.Row="1" Grid.Column="1"/>
+        
+        
+        <Label x:Name="PersonaIdLabel" Content="PersonaID" Grid.Row="1" Grid.Column="1"/>
         <TextBox x:Name="PersonaIdTextBox" Grid.Row="1" Grid.Column="3">
             <TextBox.Text>
                 <Binding Path="PersonaId" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                     <Binding.ValidationRules>
-                        <ExceptionValidationRule/>
+                        <src:IdValidacion x:Name="idValidacion" ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Content="Nombre" Grid.Row="3" Grid.Column="1"/>
+        <Label x:Name="NombreLabel" Content="Nombre" Grid.Row="3" Grid.Column="1"/>
         <TextBox x:Name="NombreTextBox" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="5">
             <TextBox.Text>
-                <Binding Path="Nombre" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                <Binding Path="Nombre" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <src:NombreValidacion x:Name="nombreValidacion" ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Content="Dirección" Grid.Row="5" Grid.Column="1"/>
+        <Label x:Name="DireccionLabel" Content="Dirección" Grid.Row="5" Grid.Column="1"/>
         <TextBox x:Name="DireccionTextBox" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5">
             <TextBox.Text>
-                <Binding Path="Direccion" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                <Binding Path="Direccion" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <src:DireccionValidacion x:Name="direccionValidacion" ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Content="Cedula" Grid.Row="7" Grid.Column="1"/>
+        <Label x:Name="CedulaLabel" Content="Cedula" Grid.Row="7" Grid.Column="1"/>
         <TextBox x:Name="CedulaTextBox" Grid.Row="7" Grid.Column="3">
             <TextBox.Text>
-                <Binding Path="Cedula" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                <Binding Path="Cedula" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <src:CedulaValidacion x:Name="cedulaValidacion" ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Content="F.Nacimiento" Grid.Row="7" Grid.Column="5"/>
+        <Label x:Name="FechaLabel" Content="F.Nacimiento" Grid.Row="7" Grid.Column="5"/>
         <DatePicker x:Name="FechaDatePicker" Grid.Row="7" Grid.Column="7">
             <DatePicker.SelectedDate>
-                <Binding Path="FechaNacimiento" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                <Binding Path="FechaNacimiento" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <src:FechaValidacion x:Name="fechaValidacion" ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
             </DatePicker.SelectedDate>
         </DatePicker>
+        
+        
         <GroupBox Header="Agregar Telefonos" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="7" Height="Auto">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Teléfono:"/>
+                    <Label x:Name="TelefonoLabel" Content="Telefono:"/>
                     <TextBox x:Name="TelefonoTextBox" Width="110">
                         <TextBox.Text>
-                            <Binding Path="Telefonos.Telefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                            <Binding Path="Telefonos.Telefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <src:TelefonoValidacion x:Name="telefonoValidacion" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
                         </TextBox.Text>
                     </TextBox>
-                    <Label Content="Tipo"/>
+                    <Label x:Name="TipoLabel" Content="Tipo"/>
                     <TextBox x:Name="TipoTextBox" Width="110">
                         <TextBox.Text>
-                            <Binding Path="Telefonos.TipoTelefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                            <Binding Path="Telefonos.TipoTelefono" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <src:TipoValidacion x:Name="tipoValidacion" ValidatesOnTargetUpdated="True"/>
+                                </Binding.ValidationRules>
+                            </Binding>
                         </TextBox.Text>
                     </TextBox>
                     <Button x:Name="MasButton" Width="40" HorizontalAlignment="Right" Click="MasButton_Click">
@@ -89,7 +120,11 @@
                 </StackPanel>
                 <DataGrid x:Name="TelefonosDataGrid" Height="100">
                     <DataGrid.ItemsSource>
-                        <Binding Path="Telefonos" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                        <Binding Path="Telefonos" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <src:TelefonosValidacion x:Name="telefonosValidacion" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
                     </DataGrid.ItemsSource>
                 </DataGrid>
                 <Button x:Name="RemoverButton" Content="Remover Fila" Width="120" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Click="RemoverButton_Click">
@@ -99,6 +134,8 @@
                 </Button>
             </StackPanel>
         </GroupBox>
+        
+        
         <Button x:Name="BuscarButton" Content="Buscar" Grid.Row="1" Grid.Column="5" HorizontalContentAlignment="Right" Click="BuscarButton_Click">
             <Button.Background>
                 <ImageBrush ImageSource="Iconos\buscar.png" AlignmentX="Left" Stretch="Uniform"/>
@@ -113,11 +150,85 @@
             <Button.Background>
                 <ImageBrush ImageSource="Iconos\guardar.jpg" AlignmentX="Left" Stretch="Uniform"/>
             </Button.Background>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=PersonaIdTextBox, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=NombreTextBox, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=DireccionTextBox, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=CedulaTextBox, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=FechaDatePicker, Path=(Validation.HasError)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
         <Button x:Name="EliminarButton" Content="Eliminar" Grid.Row="10" Grid.Column="7" HorizontalContentAlignment="Right" Click="EliminarButton_Click">
             <Button.Background>
                 <ImageBrush ImageSource="Iconos\eliminar.png" AlignmentX="Left" Stretch="Uniform"/>
             </Button.Background>
         </Button>
+        
+        
+        <StackPanel Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="6">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Red" />
+                </Style>
+                <src:VisibilidadErrores x:Key="ToVisibility" />
+            </StackPanel.Resources>
+            <TextBlock Visibility="{Binding ElementName=PersonaIdTextBox, Path=(Validation.Errors), Converter={StaticResource ToVisibility}}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding ElementName="PersonaIdLabel" Path="Content"/>
+                        <Binding ElementName="PersonaIdTextBox" Path="(Validation.Errors)[0].ErrorContent"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Visibility="{Binding ElementName=NombreTextBox, Path=(Validation.Errors), Converter={StaticResource ToVisibility}}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding ElementName="NombreLabel" Path="Content"/>
+                        <Binding ElementName="NombreTextBox" Path="(Validation.Errors)[0].ErrorContent"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Visibility="{Binding ElementName=DireccionTextBox, Path=(Validation.Errors), Converter={StaticResource ToVisibility}}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding ElementName="DireccionLabel" Path="Content"/>
+                        <Binding ElementName="DireccionTextBox" Path="(Validation.Errors)[0].ErrorContent"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Visibility="{Binding ElementName=CedulaTextBox, Path=(Validation.Errors), Converter={StaticResource ToVisibility}}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding ElementName="CedulaLabel" Path="Content"/>
+                        <Binding ElementName="CedulaTextBox" Path="(Validation.Errors)[0].ErrorContent"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Visibility="{Binding ElementName=FechaDatePicker, Path=(Validation.Errors), Converter={StaticResource ToVisibility}}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding ElementName="FechaLabel" Path="Content"/>
+                        <Binding ElementName="FechaDatePicker" Path="(Validation.Errors)[0].ErrorContent"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Visibility="{Binding ElementName=TelefonosDataGrid, Path=(Validation.Errors), Converter={StaticResource ToVisibility}}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Telefonos - {0}">
+                        <Binding ElementName="TelefonosDataGrid" Path="(Validation.Errors)[0].ErrorContent"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Window>

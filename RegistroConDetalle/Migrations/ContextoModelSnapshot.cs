@@ -45,7 +45,7 @@ namespace RegistroConDetalle.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PersonasPersonaId")
+                    b.Property<int>("PersonaId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Telefono")
@@ -56,7 +56,7 @@ namespace RegistroConDetalle.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonasPersonaId");
+                    b.HasIndex("PersonaId");
 
                     b.ToTable("TelefonosDetalle");
                 });
@@ -65,7 +65,9 @@ namespace RegistroConDetalle.Migrations
                 {
                     b.HasOne("RegistroConDetalle.Entidades.Personas", null)
                         .WithMany("Telefonos")
-                        .HasForeignKey("PersonasPersonaId");
+                        .HasForeignKey("PersonaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
